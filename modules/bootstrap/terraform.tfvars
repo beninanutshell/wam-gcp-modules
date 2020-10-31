@@ -1,10 +1,10 @@
 
-org_id = "913413906713"
+# org_id = "xxxxxxxxxxx"
 
-billing_account = "015962-44569B-FD1D17"
+# billing_account = "xxxxxxxx"
 
-group_org_admins = "admin-org@beninanutshell.com"
+# group_org_admins = "admin-org@beninanutshell.com"
 
-group_billing_admins = "admin-billing@beninanutshell.com"
+# group_billing_admins = "admin-billing@beninanutshell.com"
 
-default_region = "europe-west1"
+# default_region = "europe-west1"
