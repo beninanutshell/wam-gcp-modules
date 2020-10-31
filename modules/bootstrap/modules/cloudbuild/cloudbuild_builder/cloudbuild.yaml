@@ -1,0 +1,17 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '--tag=eu.gcr.io/${PROJECT_ID}/terraform',
+    '--build-arg=TERRAFORM_VERSION=${_TERRAFORM_VERSION}',
+    '--build-arg=TERRAFORM_VERSION_SHA256SUM=${_TERRAFORM_VERSION_SHA256SUM}',
+    '--build-arg=TERRAFORM_VALIDATOR_RELEASE=${_TERRAFORM_VALIDATOR_RELEASE}',
+    '.'
+    ]
+- name: 'eu.gcr.io/${PROJECT_ID}/terraform'
+  args: ['version']
+substitutions:
+  _TERRAFORM_VERSION: '0.13.5' # default value
+  _TERRAFORM_VERSION_SHA256SUM: 'f7b7a7b1bfbf5d78151cfe3d1d463140b5fd6a354e71a7de2b5644e652ca5147' # default value
+  _TERRAFORM_VALIDATOR_RELEASE: '2020-09-24'
+images: ['eu.gcr.io/${PROJECT_ID}/terraform']
