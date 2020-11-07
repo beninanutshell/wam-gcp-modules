@@ -15,10 +15,10 @@ output "csr_repos" {
 
 output "kms_keyring" {
   description = "KMS Keyring created by the module."
-  value       = google_kms_key_ring.tf_keyring
+  value       = google_kms_key_ring.org_bootstrap_kr
 }
 
 output "kms_crypto_key" {
   description = "KMS key created by the module."
-  value       = google_kms_crypto_key.tf_key
+  value       = google_kms_crypto_key.org_bootstrap_key
 }
