@@ -111,6 +111,7 @@ resource "google_kms_key_ring" "org_bootstrap_kr" {
 resource "google_kms_crypto_key" "org_bootstrap_key" {
   name     = "wam-org-bootstrap-euw1-key"
   key_ring = google_kms_key_ring.org_bootstrap_kr.self_link
+  labels   = {}
 }
 
 /******************************************
