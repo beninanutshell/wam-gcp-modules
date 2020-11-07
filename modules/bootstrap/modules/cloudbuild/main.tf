@@ -95,9 +95,9 @@ resource "google_storage_bucket" "cloudbuild_default_bucket" {
   KMS Keyring
  *****************************************/
 
-resource "google_kms_key_ring" "tf_keyring" {
+resource "google_kms_key_ring" "org-bootstrap_kr" {
   project  = module.cloudbuild_project.project_id
-  name     = "wam-tf-keyring"
+  name     = "wam-org-bootstrap-euw1-kr"
   location = var.default_region
   depends_on = [
     google_project_service.cloudbuild_apis,
@@ -108,9 +108,9 @@ resource "google_kms_key_ring" "tf_keyring" {
   KMS Key
  *****************************************/
 
-resource "google_kms_crypto_key" "tf_key" {
-  name     = "wam-tf-key"
-  key_ring = google_kms_key_ring.tf_keyring.self_link
+resource "google_kms_crypto_key" "bootstrap_key" {
+  name     = "wam-org-bootstrap-euw1-key"
+  key_ring = google_kms_key_ring.org-bootstrap.self_link
 }
 
 /******************************************
@@ -118,7 +118,7 @@ resource "google_kms_crypto_key" "tf_key" {
  *****************************************/
 
 resource "google_kms_crypto_key_iam_binding" "cloudbuild_crypto_key_decrypter" {
-  crypto_key_id = google_kms_crypto_key.tf_key.self_link
+  crypto_key_id = google_kms_crypto_key.bootstrap_key.self_link
   role          = "roles/cloudkms.cryptoKeyDecrypter"
 
   members = [
@@ -135,7 +135,7 @@ resource "google_kms_crypto_key_iam_binding" "cloudbuild_crypto_key_decrypter" {
  *****************************************/
 
 resource "google_kms_crypto_key_iam_binding" "cloud_build_crypto_key_encrypter" {
-  crypto_key_id = google_kms_crypto_key.tf_key.self_link
+  crypto_key_id = google_kms_crypto_key.bootstrap_key.self_link
   role          = "roles/cloudkms.cryptoKeyEncrypter"
 
   members = [
