@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: wam-gcp-modules
+  annotations:
+    github.com/project-slug: beninanutshell/wam-gcp-modules
+spec:
+  type: other
+  lifecycle: unknown
+  owner: guests
